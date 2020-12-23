@@ -6,7 +6,7 @@
   "scripts": {
     "prestart": "babel ./src --out-dir build",
     "start": "node ./build/bin/www",
-    "startdev": "nodemon --exec babel-node ./src/bin/www",
+    "startdev": "nodemon --exec babel-node ./src/bin/www.js",
     "lint": "./node_modules/.bin/eslint ./src",
     "pretty": "prettier --write '**/*.{js,json}' '!node_modules/**'",
     "postpretty": "npm run lint --fix"
@@ -32,6 +32,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
+    "node-fetch": "^2.6.1",
     "prettier": "^2.2.1"
   },
   "devDependencies": {
