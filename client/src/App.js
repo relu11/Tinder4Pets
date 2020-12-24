@@ -1,26 +1,29 @@
-import React, { Component } from "react";
-import "./App.css";
+import React, { useState } from 'react';
+import './App.css';
 
-class App extends Component {
-  state = { users: [] };
+function App() {
+  const [logs, setLogs] = useState([]);
 
-  componentDidMount() {
-    fetch("/users")
-      .then((res) => res.json())
-      .then((users) => this.setState({ users }));
-  }
+  const handleClick = async service => {
+    const res = await fetch(`http://localhost:3001/${service == 'index' ? '' : service}`);
+    setLogs([await res.text(), ...logs]);
+    console.log(logs)
+  };
 
-  render() {
-    return (
-      <div className="App">
-        <h1>Users</h1>
-        {/* <h1>{this.state.users}</h1> */}
-        {this.state.users.map((user) => (
-          <div key={user.id}>{user.username} </div>
-        ))}
+  return (
+    <div className='App'>
+      <div className='buttons'>
+        <button onClick={e => handleClick('communication')} >communication</button>
+        <button onClick={e => handleClick('events')} >events</button>
+        <button onClick={e => handleClick('iam')} >communication</button>
+        <button onClick={e => handleClick('index')} >index</button>
+        <button onClick={e => handleClick('recommendation')} >recommendation</button>
       </div>
-    );
-  }
+      <div className='logs'>
+        {logs.map(log => <p>{log}</p>)}
+      </div>
+    </div>
+  );
 }
 
 export default App;

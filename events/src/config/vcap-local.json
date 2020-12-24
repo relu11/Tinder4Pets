@@ -1,0 +1,20 @@
+{
+    "services": {
+        "cloudantNoSQLDB": {
+            "credentials":
+            {
+                "apikey": "dp4qDx6ZPLCfOKUFT_Ht_QprhcjWRhvTI8-ayWfv39o5",
+                "host": "14665a13-3fa6-4cec-944e-641b9043e417-bluemix.cloudantnosqldb.appdomain.cloud",
+                "iam_apikey_description": "Auto-generated for key e95cfc76-ac2b-40c6-83f4-625422525228",
+                "iam_apikey_name": "pets-manager",
+                "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/a9eb80b88dd1437ca3dea4206dcceb14::serviceid:ServiceId-65bbb79c-446a-4fac-a824-3d27e0d3530c",
+                "url": "https://14665a13-3fa6-4cec-944e-641b9043e417-bluemix.cloudantnosqldb.appdomain.cloud",
+                "username": "14665a13-3fa6-4cec-944e-641b9043e417-bluemix"
+              }
+            ,
+            "label": "cloudantNoSQLDB"
+        }
+    }
+}
+
