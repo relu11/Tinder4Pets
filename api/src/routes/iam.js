@@ -1,6 +1,7 @@
 import { Router } from "express";
 import fetch from "node-fetch";
 import { IAM_API } from "../../config";
+import { authVaildator } from "../services/auth";
 
 const router = Router();
 
@@ -24,7 +25,7 @@ router.post("/signup", async (req, res) => {
       body: JSON.stringify(body),
     });
     const jsonRes = await serviceRes.json();
-    res.cookie("token", jsonRes.token);
+    res.cookie("authToken", jsonRes.token, { httpOnly: true });
     return res.send(jsonRes);
   } catch (error) {
     console.log(error.message);
@@ -45,12 +46,16 @@ router.post("/login", async (req, res) => {
       },
       body: JSON.stringify(body),
     });
-    const jsonRes = await serviceRes.json()
+    const jsonRes = await serviceRes.json();
     return res.status(serviceRes.status).send(jsonRes);
   } catch (err) {
     console.log(err.message);
     return res.status(500).send(err.message);
   }
+});
+
+router.get("/validate", authVaildator, async (req, res) => {
+  res.send({ user: req.user });
 });
 
 export default router;

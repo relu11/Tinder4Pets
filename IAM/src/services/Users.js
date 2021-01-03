@@ -4,12 +4,7 @@ import { getDocWithId, insertDoc } from "./Database";
 import { TOKEN_SECRET } from "../config/config";
 
 const generateUserToken = (user) => {
-  const token = jwt.sign(
-    {
-      email: user.email,
-    },
-    TOKEN_SECRET
-  );
+  const token = jwt.sign(user, TOKEN_SECRET);
   return token;
 };
 
@@ -36,6 +31,7 @@ export const createUser = async (userData) => {
   const userCreated = await insertDoc("users", userDoc);
   userDoc = await getDocWithId("users", userCreated.id);
   const token = generateUserToken(userDoc);
+  delete userDoc.password;
   return {
     token,
     userDoc,
@@ -59,6 +55,7 @@ export const login = async (userData) => {
       userDoc.password
     );
     if (passwordValidation) {
+      delete userDoc.password;
       const token = await generateUserToken(userDoc);
       return { token, userDoc };
     }
@@ -69,4 +66,41 @@ export const login = async (userData) => {
     }
     throw Error("unkown-error");
   }
+};
+
+export const getUserFromToken = async (token) => {
+  const { email } = jwt.decode(token);
+  if (!email) {
+    throw new Error("invalid-token");
+  }
+  try {
+    const userDoc = await getDocWithId("users", email);
+    return userDoc;
+  } catch (err) {
+    if (err.error === "not_found") {
+      throw Error("not-found");
+    }
+    throw Error("unkown-error");
+  }
+};
+
+export const authVaildator = (req, res, next) => {
+  if (req.headers.authorization) {
+    const token = req.headers.authorization.split(" ")[1];
+    if (!token) {
+      return res.status(403).send({ success: false, message: "forbidden" });
+    }
+    console.log({ token, TOKEN_SECRET });
+    return jwt.verify(token, TOKEN_SECRET, (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(403).send({ success: false, message: "forbidden" });
+      }
+      getUserFromToken(token).then((user) => {
+        req.user = user;
+        next();
+      });
+    });
+  }
+  return res.status(403).send({ success: false, message: "forbidden" });
 };
