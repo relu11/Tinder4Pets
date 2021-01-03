@@ -1,19 +1,43 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Navbar from './Navbar';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { initAuth } from "../helpers/auth";
+import PrivateRoute from "./Auth/PrivateRoute";
+import Navbar from "./Navbar";
+import Login from "./Auth/Login";
+import Signup from "./Auth/Signup";
+import Logout from "./Auth/Logout";
 
-function App() {
+function App({ isLoggedIn, currentUser }) {
+  useEffect(() => {
+    console.log(currentUser);
+    if (isLoggedIn === null) {
+      initAuth();
+    }
+  });
+  if (isLoggedIn === null) {
+    return "Loading....";
+  }
   return (
-    <div className='App'>
+    <div className="App">
       <Router>
         <Navbar />
         <Switch>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/logout">
+            <Logout />
+          </Route>
           <Route path="/about">
             <p>About</p>
           </Route>
-          <Route path="/users">
-            <p>users</p>
-          </Route>
+          <PrivateRoute path="/users">
+            <p>Users</p>
+          </PrivateRoute>
           <Route path="/">
             <p>Home</p>
           </Route>
@@ -23,4 +47,9 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.auth.isLoggedIn,
+  currentUser: state.auth.currentUser,
+});
+
+export default connect(mapStateToProps)(App);
