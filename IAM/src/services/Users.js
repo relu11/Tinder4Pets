@@ -54,6 +54,7 @@ export const login = async (userData) => {
       userDoc.password
     );
     if (passwordValidation) {
+      console.log("in");
       delete userDoc.password;
       const token = await generateUserToken(userDoc);
       return { token, userDoc };
