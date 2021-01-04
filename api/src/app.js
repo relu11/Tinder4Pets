@@ -9,6 +9,7 @@ import iamRouter from "./routes/iam";
 import communicationRouter from "./routes/communication";
 import eventsRouter from "./routes/events";
 import recommendationRouter from "./routes/recommendation";
+import userRouter from "./routes/user";
 import { CLIENTS } from "./config/config";
 
 const app = express();
@@ -30,6 +31,7 @@ app.use("/iam", iamRouter);
 app.use("/communication", communicationRouter);
 app.use("/events", eventsRouter);
 app.use("/recommendation", recommendationRouter);
+app.use("/user", userRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

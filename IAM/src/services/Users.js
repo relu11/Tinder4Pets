@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { getDocWithId, insertDoc } from "./Database";
+import { getDocWithId, insertDoc, getDocs } from "./Database";
 import { TOKEN_SECRET } from "../config/config";
 
 const generateUserToken = (user) => {
@@ -21,7 +21,6 @@ export const createUser = async (userData) => {
   }
   const hashedPassword = await hashPassword(password);
   let userDoc = {
-    _id: email,
     email,
     name,
     password: hashedPassword,
@@ -49,7 +48,7 @@ export const login = async (userData) => {
     throw new Error("missing-data");
   }
   try {
-    const userDoc = await getDocWithId("users", email);
+    const userDoc = (await getDocs("users", { email }))[0];
     const passwordValidation = await validatePassword(
       password,
       userDoc.password
@@ -69,12 +68,12 @@ export const login = async (userData) => {
 };
 
 export const getUserFromToken = async (token) => {
-  const { email } = jwt.decode(token);
-  if (!email) {
+  const { _id } = jwt.decode(token);
+  if (!_id) {
     throw new Error("invalid-token");
   }
   try {
-    const userDoc = await getDocWithId("users", email);
+    const userDoc = await getDocWithId("users", _id);
     return userDoc;
   } catch (err) {
     if (err.error === "not_found") {
@@ -90,16 +89,23 @@ export const authVaildator = (req, res, next) => {
     if (!token) {
       return res.status(403).send({ success: false, message: "forbidden" });
     }
-    console.log({ token, TOKEN_SECRET });
-    return jwt.verify(token, TOKEN_SECRET, (err, result) => {
+    return jwt.verify(token, TOKEN_SECRET, (err) => {
       if (err) {
         console.log(err);
         res.status(403).send({ success: false, message: "forbidden" });
       }
-      getUserFromToken(token).then((user) => {
-        req.user = user;
-        next();
-      });
+      getUserFromToken(token)
+        .then((user) => {
+          req.user = user;
+          next();
+        })
+        .catch((error) => {
+          if (error.error === "not-found") {
+            res.status(404).send({ success: false, message: "invalid token" });
+          } else {
+            res.status(403).send({ success: false, message: "forbidden" });
+          }
+        });
     });
   }
   return res.status(403).send({ success: false, message: "forbidden" });
