@@ -8,7 +8,7 @@ import {
 } from "./actionTypes";
 
 export const login = (userData) => async (dispatch) => {
-  const res = await fetch(`${process.env.REACT_APP_API_URL}/iam/login`, {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
     method: "POST",
     credentials: "include",
     body: JSON.stringify(userData),
@@ -34,7 +34,7 @@ export const login = (userData) => async (dispatch) => {
 };
 
 export const signup = (userData) => async (dispatch) => {
-  const res = await fetch(`${process.env.REACT_APP_API_URL}/iam/signup`, {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/auth/signup`, {
     method: "POST",
     credentials: "include",
     body: JSON.stringify(userData),
