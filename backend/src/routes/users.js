@@ -1,6 +1,13 @@
 import { Router } from "express";
 import { authVaildator } from "../services/auth";
-import { addPet, deletePet, editPet, getUserPets } from "../services/users";
+import {
+  addPet,
+  deletePet,
+  editPet,
+  getUserAdoptedPets,
+  getUserEvents,
+  getUserPets,
+} from "../services/users";
 
 const router = Router();
 
@@ -51,6 +58,24 @@ router.delete("/me/pets/:petId", authVaildator, async (req, res) => {
     } else {
       res.status(500).send({ success: false, message: err.message });
     }
+  }
+});
+
+router.get("/me/events", authVaildator, async (req, res) => {
+  try {
+    const events = await getUserEvents(req.user);
+    res.send({ success: true, events });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+});
+
+router.get("/me/adopted", authVaildator, async (req, res) => {
+  try {
+    const adoptedPets = await getUserAdoptedPets(req.user._id);
+    res.send({ success: true, adoptedPets });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
   }
 });
 

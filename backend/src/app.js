@@ -31,7 +31,7 @@ app.use("/auth", authRouter);
 app.use("/communication", communicationRouter);
 app.use("/events", eventsRouter);
 app.use("/recommendation", recommendationRouter);
-app.use("/user", usersRouter);
+app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -31,3 +31,17 @@ export const deletePet = async (userId, petId) => {
   const result = await deleteDoc("pets", petId);
   return result;
 };
+
+export const getUserEvents = async (user) => {
+  const eventsIds = user.attendedEvents;
+  if (!eventsIds) {
+    return [];
+  }
+  const events = await getDocs("events", { _id: { $in: eventsIds } });
+  return events;
+};
+
+export const getUserAdoptedPets = async (userId) => {
+  const adoptedPets = await getDocs("pets", { adopteeId: userId });
+  return adoptedPets;
+};
