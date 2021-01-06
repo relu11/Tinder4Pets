@@ -9,7 +9,8 @@ const eventsReducer = (state = initialState, action) => {
     switch (action.type) {
       
       case ADD_EVENT: {
-        const  event  = action.payload;
+        const { event } = action.payload;
+        console.log(event);
         return {
           ...state,
           events: state.events ? state.events.concat(event) : [event],
