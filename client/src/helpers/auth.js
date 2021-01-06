@@ -1,6 +1,6 @@
 import Cookie from "universal-cookie";
 import jwt from "jsonwebtoken";
-import { initLoggedInState, setUser } from "../redux/actions";
+import { initLoggedInState, setUser } from "../redux/actions/authActions";
 import store from "../redux/store";
 
 export const initAuth = () => {

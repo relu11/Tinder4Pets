@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 import Login from "./Auth/Login";
 import Signup from "./Auth/Signup";
 import Logout from "./Auth/Logout";
+import Profile from "./Profile/Profile";
 
 function App({ isLoggedIn, currentUser }) {
   useEffect(() => {
@@ -32,6 +33,9 @@ function App({ isLoggedIn, currentUser }) {
           <Route exact path="/logout">
             <Logout />
           </Route>
+          <PrivateRoute exact path="/profile">
+            <Profile />
+          </PrivateRoute>
           <Route path="/about">
             <p>About</p>
           </Route>
