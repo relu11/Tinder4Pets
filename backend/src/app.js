@@ -8,6 +8,7 @@ import indexRouter from "./routes/index";
 import authRouter from "./routes/auth";
 import communicationRouter from "./routes/communication";
 import eventsRouter from "./routes/events";
+import petsRouter from "./routes/pets";
 import recommendationRouter from "./routes/recommendation";
 import usersRouter from "./routes/users";
 import { CLIENTS } from "./config/config";
@@ -30,6 +31,7 @@ app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/communication", communicationRouter);
 app.use("/events", eventsRouter);
+app.use("/pets", petsRouter);
 app.use("/recommendation", recommendationRouter);
 app.use("/user", usersRouter);
 
