@@ -5,7 +5,7 @@ import {
   CLEAR_USER,
   NOT_LOGGED_IN,
   SET_USER,
-} from "./actionTypes";
+} from "../actionTypes";
 
 export const login = (userData) => async (dispatch) => {
   const res = await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {

@@ -8,19 +8,21 @@ export const getUserPets = async (id) => {
 
 export const addPet = async (ownerId, newPetData) => {
   const newPet = { ...newPetData, ownerId };
-  const petDoc = await insertDoc("pets", newPet);
+  const result = await insertDoc("pets", newPet);
+  const petDoc = await getDocWithId("pets", result.id);
   return petDoc;
 };
 
 export const editPet = async (userId, petId, newPetData) => {
-  const petDoc = await getDocWithId("pets", petId);
+  let petDoc = await getDocWithId("pets", petId);
   if (petDoc.ownerId !== userId) {
     throw new Error("unauthorized");
   }
   const newPetDoc = { ...petDoc, ...newPetData };
   delete newPetDoc._rev;
   const result = await insertDoc("pets", newPetDoc);
-  return result;
+  petDoc = await getDocWithId("pets", result.id);
+  return petDoc;
 };
 
 export const deletePet = async (userId, petId) => {

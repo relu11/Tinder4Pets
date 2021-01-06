@@ -21,8 +21,9 @@ router.post("/me/pets", authVaildator, async (req, res) => {
   const id = req.user._id;
   const { newPet } = req.body;
   try {
-    await addPet(id, newPet);
-    res.send({ pet: newPet });
+    const result = await addPet(id, newPet);
+    console.log(result);
+    res.send({ pet: result });
   } catch (err) {
     res.status(500).send({ success: false, message: err.message });
   }
@@ -74,6 +75,17 @@ router.get("/me/adopted", authVaildator, async (req, res) => {
   try {
     const adoptedPets = await getUserAdoptedPets(req.user._id);
     res.send({ success: true, adoptedPets });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+});
+
+router.get("/profile", authVaildator, async (req, res) => {
+  try {
+    const pets = await getUserPets(req.user._id);
+    const events = await getUserEvents(req.user);
+    const adoptedPets = await getUserAdoptedPets(req.user._id);
+    res.send({ success: true, pets, events, adoptedPets });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }

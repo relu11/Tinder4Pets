@@ -1,7 +1,6 @@
 import {
   Button,
   Container,
-  makeStyles,
   Paper,
   TextField,
   Typography,
@@ -10,22 +9,11 @@ import Alert from "@material-ui/lab/Alert";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { clearAuthError, signup } from "../../redux/actions";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: theme.spacing(6),
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-    textAlign: "center",
-  },
-  formField: {
-    marginBottom: theme.spacing(2),
-  },
-}));
+import { useFormStyles } from "../../helpers/styles";
+import { clearAuthError, signup } from "../../redux/actions/authActions";
 
 function Signup({ isLoggedIn, error, clearError, signupAction }) {
-  const classes = useStyles();
+  const classes = useFormStyles();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
