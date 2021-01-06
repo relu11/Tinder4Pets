@@ -8,6 +8,7 @@ import Login from "./Auth/Login";
 import Signup from "./Auth/Signup";
 import Logout from "./Auth/Logout";
 import Profile from "./Profile/Profile";
+import Events from "./Events/Events";
 
 function App({ isLoggedIn, currentUser }) {
   useEffect(() => {
@@ -32,6 +33,9 @@ function App({ isLoggedIn, currentUser }) {
           </Route>
           <Route exact path="/logout">
             <Logout />
+          </Route>
+          <Route exact path="/events">
+            <Events />
           </Route>
           <PrivateRoute exact path="/profile">
             <Profile />

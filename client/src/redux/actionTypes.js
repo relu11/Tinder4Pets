@@ -7,3 +7,8 @@ export const CLEAR_USER = "CLEAR_USER";
 export const SETUP_PROFILE = "SETUP_PROFILE";
 export const ADD_PET = "ADD_PET";
 export const ADD_PET_RESET = "ADD_PET_RESET";
+export const ADD_EVENT = "ADD_EVENT";
+export const DELETE_EVENT = "DELETE_EVENT";
+export const GET_ALL_EVENTS = "GET_ALL_EVENTS";
+export const ADD_EVENT_RESET = "ADD_EVENT_RESET";
+
