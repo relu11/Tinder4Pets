@@ -1,4 +1,4 @@
-import { ADD_PET, ADD_PET_RESET, SETUP_PROFILE} from "../actionTypes";
+import { ADD_PET, ADD_PET_RESET, SETUP_PROFILE } from "../actionTypes";
 
 const initialState = {
   pets: null,
@@ -34,7 +34,6 @@ const userReducer = (state = initialState, action) => {
         petAdded: false,
       };
     }
-
     default: {
       return state;
     }
