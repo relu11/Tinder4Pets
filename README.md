@@ -4,7 +4,7 @@
 Install dependincies
 ```
 cd client && npm i
-cd ../react-backend && npm i
+cd ../backend && npm i
 ```
 
 # Git Flow
