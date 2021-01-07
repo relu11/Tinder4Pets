@@ -32,7 +32,7 @@ export const editArticle = async (userId, articleId, newArticleData) => {
     throw new Error("unauthorized");
   }
   const newArticleDoc = { ...articleDoc, ...newArticleData };
-  delete newArticleDoc._rev;
+
   console.log(newArticleDoc);
   const result = await insertDoc("articles", newArticleDoc);
   return result;

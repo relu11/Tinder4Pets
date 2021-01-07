@@ -20,7 +20,7 @@ export const editEvent = async (userId, eventId, newEventData) => {
     throw new Error("unauthorized");
   }
   const newEventDoc = { ...eventDoc, ...newEventData };
-  delete newEventDoc._rev;
+
   console.log(newEventDoc);
   const result = await insertDoc("events", newEventDoc);
   return result;
