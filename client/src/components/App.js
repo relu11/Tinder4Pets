@@ -41,7 +41,7 @@ function App({ isLoggedIn, currentUser }) {
           <PrivateRoute exact path="/profile">
             <Profile />
           </PrivateRoute>
-          <PrivateRoute exact path="/adoptionPets">
+          <PrivateRoute exact path="/adoption-pets">
             <AdoptionPets />
           </PrivateRoute>
           <Route path="/about">
