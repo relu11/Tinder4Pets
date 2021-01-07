@@ -9,6 +9,7 @@ import Signup from "./Auth/Signup";
 import Logout from "./Auth/Logout";
 import Profile from "./Profile/Profile";
 import Events from "./Events/Events";
+import AdoptionPets from "./Adoptionpets/AdoptionPets";
 
 function App({ isLoggedIn, currentUser }) {
   useEffect(() => {
@@ -39,6 +40,9 @@ function App({ isLoggedIn, currentUser }) {
           </Route>
           <PrivateRoute exact path="/profile">
             <Profile />
+          </PrivateRoute>
+          <PrivateRoute exact path="/adoptionPets">
+            <AdoptionPets />
           </PrivateRoute>
           <Route path="/about">
             <p>About</p>
