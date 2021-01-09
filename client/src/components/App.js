@@ -8,6 +8,7 @@ import Login from "./Auth/Login";
 import Signup from "./Auth/Signup";
 import Logout from "./Auth/Logout";
 import Profile from "./Profile/Profile";
+import PetMatches from "./PetMatches";
 
 function App({ isLoggedIn, currentUser }) {
   useEffect(() => {
@@ -35,6 +36,9 @@ function App({ isLoggedIn, currentUser }) {
           </Route>
           <PrivateRoute exact path="/profile">
             <Profile />
+          </PrivateRoute>
+          <PrivateRoute exact path="/match/:petId">
+            <PetMatches />
           </PrivateRoute>
           <Route path="/about">
             <p>About</p>

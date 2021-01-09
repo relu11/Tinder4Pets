@@ -7,3 +7,6 @@ export const CLEAR_USER = "CLEAR_USER";
 export const SETUP_PROFILE = "SETUP_PROFILE";
 export const ADD_PET = "ADD_PET";
 export const ADD_PET_RESET = "ADD_PET_RESET";
+export const SET_CURRRENT_PET = "SET_CURRRENT_PET";
+export const SET_MATCHES = "SET_MATCHES";
+export const CLEAR_MATCHES = "CLEAR_MATCHES";
