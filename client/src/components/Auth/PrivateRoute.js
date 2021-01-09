@@ -2,9 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect, Route } from "react-router-dom";
 
-function PrivateRoute({ children, isLoggedIn }) {
+function PrivateRoute(props) {
+  const { children, isLoggedIn } = props;
   return (
     <Route
+      {...props}
       render={({ location }) =>
         isLoggedIn ? (
           children

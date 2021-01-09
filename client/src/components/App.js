@@ -8,6 +8,7 @@ import Login from "./Auth/Login";
 import Signup from "./Auth/Signup";
 import Logout from "./Auth/Logout";
 import Profile from "./Profile/Profile";
+import PetMatches from "./PetMatches";
 import Events from "./Events/Events";
 import AdoptionPets from "./Adoptionpets/AdoptionPets";
 
@@ -40,6 +41,9 @@ function App({ isLoggedIn, currentUser }) {
           </Route>
           <PrivateRoute exact path="/profile">
             <Profile />
+          </PrivateRoute>
+          <PrivateRoute exact path="/match/:petId">
+            <PetMatches />
           </PrivateRoute>
           <PrivateRoute exact path="/adoption-pets">
             <AdoptionPets />
