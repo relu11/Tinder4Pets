@@ -17,7 +17,7 @@ router.post("/", authVaildator, async (req, res) => {
     try {
       await addEvent(id, newEvent);
       console.log("Added event", newEvent);
-      res.send({ event: newEvent });
+      res.send({ success: true, event: newEvent });
     } catch (err) {
       res.status(500).send({ sucess: false, message: err.message });
     }
@@ -25,7 +25,7 @@ router.post("/", authVaildator, async (req, res) => {
     res.send({ success: false, error: "Not Admin" });
   }
 });
-// update
+
 router.put("/:eventId", authVaildator, async (req, res) => {
   if (req.user.type === "Admin") {
     const { event } = req.body;
@@ -54,7 +54,7 @@ router.delete("/:eventId", authVaildator, async (req, res) => {
     if (err.message === "unauthorized") {
       res.status(401).send({ success: false, message: "not the owner" });
     } else if (err.error === "not_found") {
-      res.status(404).send({ success: false, message: "pet not found" });
+      res.status(404).send({ success: false, message: "event not found" });
     } else {
       res.status(500).send({ success: false, message: err.message });
     }
