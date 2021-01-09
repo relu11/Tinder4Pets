@@ -34,7 +34,7 @@ router.post("/addServices", authVaildator, async (req, res) => {
     res.status(500).send({ sucess: false, message: err.message });
   }
 });
-router.put("/editServices", authVaildator, async (req, res) => {
+router.put("/editServices/:serviceId", authVaildator, async (req, res) => {
   const { newServicesData } = req.body;
   const { serviceId } = req.params;
   try {
@@ -44,7 +44,7 @@ router.put("/editServices", authVaildator, async (req, res) => {
     res.status(500).send({ success: false, message: err.message });
   }
 });
-router.delete("/deleteService", authVaildator, async (req, res) => {
+router.delete("/deleteService/:serviceId", authVaildator, async (req, res) => {
   const { serviceId } = req.params;
   try {
     const result = await deleteService(req.user._id, serviceId);
@@ -53,4 +53,5 @@ router.delete("/deleteService", authVaildator, async (req, res) => {
     res.status(500).send({ success: false, message: err.message });
   }
 });
+
 export default router;

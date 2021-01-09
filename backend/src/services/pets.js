@@ -13,20 +13,18 @@ export const addServices = async (serviceOwnerId, newServicesData) => {
 };
 export const editServices = async (userId, serviceId, newServicesData) => {
   let serviceDoc = await getDocWithId("pets_services", serviceId);
-  if (serviceDoc.serviceOwnerId !== userId) {
-    throw new Error("unauthorized");
-  }
   const newserviceDoc = { ...serviceDoc, ...newServicesData };
-  delete newserviceDoc._rev;
+
   const result = await insertDoc("pets_services", newserviceDoc);
   serviceDoc = await getDocWithId("pets_services", result.id);
   return serviceDoc;
 };
 export const deleteService = async (userId, serviceId) => {
   const serviceDoc = await getDocWithId("pets_services", serviceId);
-  if (serviceDoc.ownerId !== userId) {
-    throw new Error("unauthorized");
-  }
+  --Todo;
+  // if (serviceDoc.ownerId !== userId) {
+  //   throw new Error("unauthorized");
+  // }
   const result = await deleteDoc("pets_services", serviceId);
   return result;
 };
