@@ -1,4 +1,10 @@
-import { getDocs, insertDoc, getDocWithId, deleteDoc } from "./Database";
+import {
+  getDocs,
+  insertDoc,
+  getDocWithId,
+  deleteDoc,
+  getAll,
+} from "./Database";
 
 export const nearbyServices = async (userCity) => {
   const nearbyService = await getDocs("pets_services", { city: userCity });
@@ -21,13 +27,13 @@ export const editServices = async (userId, serviceId, newServicesData) => {
 };
 export const deleteService = async (userId, serviceId) => {
   const serviceDoc = await getDocWithId("pets_services", serviceId);
-  --Todo;
+  // Todo;
   // if (serviceDoc.ownerId !== userId) {
   //   throw new Error("unauthorized");
   // }
   const result = await deleteDoc("pets_services", serviceId);
   return result;
-}
+};
 
 export const getAdoptionPets = async () => {
   const pets = await getAll("adoption_pets");

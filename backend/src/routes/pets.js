@@ -1,15 +1,14 @@
 import { Router } from "express";
 import { authVaildator } from "../services/auth";
 import { getAll } from "../services/Database";
-import { authVaildator } from "../services/auth";
 import {
   nearbyServices,
   addServices,
   editServices,
   deleteService,
   addAdoptionPet,
-  adoptPet, 
-  getAdoptionPets
+  adoptPet,
+  getAdoptionPets,
 } from "../services/pets";
 
 const router = Router();
