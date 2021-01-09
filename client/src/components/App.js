@@ -11,6 +11,14 @@ import Profile from "./Profile/Profile";
 import PetMatches from "./PetMatches";
 import Events from "./Events/Events";
 import AdoptionPets from "./Adoptionpets/AdoptionPets";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: "#8923FC" },
+    secondary: { main: "#AE24FF" },
+  },
+});
 
 function App({ isLoggedIn, currentUser }) {
   useEffect(() => {
@@ -24,41 +32,37 @@ function App({ isLoggedIn, currentUser }) {
   }
   return (
     <div className="App">
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/logout">
-            <Logout />
-          </Route>
-          <Route exact path="/events">
-            <Events />
-          </Route>
-          <PrivateRoute exact path="/profile">
-            <Profile />
-          </PrivateRoute>
-          <PrivateRoute exact path="/match/:petId">
-            <PetMatches />
-          </PrivateRoute>
-          <PrivateRoute exact path="/adoption-pets">
-            <AdoptionPets />
-          </PrivateRoute>
-          <Route path="/about">
-            <p>About</p>
-          </Route>
-          <PrivateRoute path="/users">
-            <p>Users</p>
-          </PrivateRoute>
-          <Route path="/">
-            <p>Home</p>
-          </Route>
-        </Switch>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/signup">
+              <Signup />
+            </Route>
+            <Route exact path="/logout">
+              <Logout />
+            </Route>
+            <Route exact path="/events">
+              <Events />
+            </Route>
+            <PrivateRoute exact path="/profile">
+              <Profile />
+            </PrivateRoute>
+            <PrivateRoute exact path="/match/:petId">
+              <PetMatches />
+            </PrivateRoute>
+            <PrivateRoute exact path="/adoption-pets">
+              <AdoptionPets />
+            </PrivateRoute>
+            <Route path="/">
+              <p>Home</p>
+            </Route>
+          </Switch>
+        </Router>
+      </ThemeProvider>
     </div>
   );
 }
