@@ -4,7 +4,11 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  FormControl,
   FormControlLabel,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
   useMediaQuery,
   useTheme,
@@ -19,6 +23,7 @@ function AddPetDialog({ open, setOpen, addPet, petAdded, resetAddPetState }) {
   const [ageMonths, setAgeMonths] = useState("");
   const [type, setType] = useState("");
   const [breed, setBreed] = useState("");
+  const [gender, setGender] = useState("");
   const [city, setCity] = useState("");
   const [lookingForMatch, setLookingForMatch] = useState(false);
 
@@ -41,6 +46,7 @@ function AddPetDialog({ open, setOpen, addPet, petAdded, resetAddPetState }) {
       breed,
       city,
       lookingForMatch,
+      gender,
     });
     setName("");
     setAgeMonths("");
@@ -71,15 +77,30 @@ function AddPetDialog({ open, setOpen, addPet, petAdded, resetAddPetState }) {
               required
               onChange={(e) => setName(e.target.value)}
             />
-            <TextField
-              className={formClasses.formField}
-              label="Type"
-              type="text"
-              value={type}
-              fullWidth
-              required
-              onChange={(e) => setType(e.target.value)}
-            />
+            <FormControl className={formClasses.formField} fullWidth required>
+              <InputLabel id="type-select-label">Type</InputLabel>
+              <Select
+                labelId="type-select-label"
+                id="type-select"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              >
+                <MenuItem value="dog">Dog</MenuItem>
+                <MenuItem value="cat">Cat</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl className={formClasses.formField} fullWidth required>
+              <InputLabel id="gender-select-label">Gender</InputLabel>
+              <Select
+                labelId="gender-select-label"
+                id="gender-select"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              >
+                <MenuItem value="male">Male</MenuItem>
+                <MenuItem value="femal">Female</MenuItem>
+              </Select>
+            </FormControl>
             <TextField
               className={formClasses.formField}
               label="Age (In Months)"

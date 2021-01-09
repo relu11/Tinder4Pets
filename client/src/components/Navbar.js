@@ -19,7 +19,17 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
+    color: theme.palette.primary.main,
+    fontWeight: "bold",
+  },
+  link: {
+    "&:hover": {
+      color: theme.palette.primary.main,
+    },
+  },
+  titleLink: {
     flexGrow: 1,
+    textDecoration: "none",
   },
 }));
 
@@ -28,40 +38,73 @@ function Navbar({ isLoggedIn }) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <nv></nv>
+      <AppBar position="static" color="transparent">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
+          <Link to="/" className={classes.titleLink}>
+            <Typography variant="h6" className={classes.title}>
+              Pets Network
+            </Typography>
+          </Link>
+          <Link
+            className={classes.link}
+            to="/"
+            component={Button}
             color="inherit"
-            aria-label="menu"
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Pets Social Network
-          </Typography>
-          <Link to="/" component={Button} color="inherit">
             Home
           </Link>
-          <Link to="/about" component={Button} color="inherit">
-            About
+          <Link
+            className={classes.link}
+            to="/events"
+            component={Button}
+            color="inherit"
+          >
+            Events
           </Link>
           {isLoggedIn ? (
             <div>
-              <Link to="/users" component={Button} color="inherit">
-                Users
+              <Link
+                className={classes.link}
+                to="/adoption-pets"
+                component={Button}
+                color="inherit"
+              >
+                Adoption Pets
               </Link>
-              <Link to="/logout" component={Button} color="inherit">
+              <Link
+                className={classes.link}
+                to="/profile"
+                component={Button}
+                color="inherit"
+              >
+                Profile
+              </Link>
+              <Link
+                className={classes.link}
+                to="/logout"
+                component={Button}
+                color="inherit"
+              >
                 Logout
               </Link>
             </div>
           ) : (
             <div>
-              <Link to="/login" component={Button} color="inherit">
+              <Link
+                className={classes.link}
+                to="/login"
+                component={Button}
+                color="inherit"
+              >
                 Login
               </Link>
-              <Link to="/signup" component={Button} color="inherit">
+              <Link
+                className={classes.link}
+                to="/signup"
+                component={Button}
+                color="inherit"
+              >
                 Signup
               </Link>
             </div>
