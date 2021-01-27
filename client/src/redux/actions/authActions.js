@@ -1,4 +1,5 @@
 import Cookies from "universal-cookie";
+import { API_URL } from "../../helpers/config";
 import {
   AUTH_ERROR,
   CLEAR_AUTH_ERROR,
@@ -8,7 +9,7 @@ import {
 } from "../actionTypes";
 
 export const login = (userData) => async (dispatch) => {
-  const res = await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
+  const res = await fetch(`${API_URL}/auth/login`, {
     method: "POST",
     credentials: "include",
     body: JSON.stringify(userData),
@@ -34,7 +35,7 @@ export const login = (userData) => async (dispatch) => {
 };
 
 export const signup = (userData) => async (dispatch) => {
-  const res = await fetch(`${process.env.REACT_APP_API_URL}/auth/signup`, {
+  const res = await fetch(`${API_URL}/auth/signup`, {
     method: "POST",
     credentials: "include",
     body: JSON.stringify(userData),

@@ -69,12 +69,12 @@ export const login = async (userData) => {
 };
 
 export const getUserFromToken = async (token) => {
-  const { _id } = jwt.decode(token);
-  if (!_id) {
+  const { id } = jwt.decode(token);
+  if (!id) {
     throw new Error("invalid-token");
   }
   try {
-    const userDoc = await getDocWithId("users", _id);
+    const userDoc = await getDocWithId("users", id);
     return userDoc;
   } catch (err) {
     if (err.error === "not_found") {

@@ -39,7 +39,7 @@ export const getUserEvents = async (user) => {
   if (!eventsIds) {
     return [];
   }
-  const events = await getDocs("events", { _id: { $in: eventsIds } });
+  const events = await getDocs("events", { id: { $in: eventsIds } });
   return events;
 };
 

@@ -86,7 +86,7 @@ function Profile(props) {
         <Grid container spacing={2}>
           {pets &&
             pets.map((p) => (
-              <Grid item key={p._id} className={classes.gridItem}>
+              <Grid item key={p.id} className={classes.gridItem}>
                 <Card className={classes.card}>
                   <CardMedia
                     image={`/${p.type === "dog" ? "dog" : "cat"}-icon.png`}

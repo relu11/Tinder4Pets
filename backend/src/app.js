@@ -28,14 +28,14 @@ app.use(
   })
 );
 
-app.use("/", indexRouter);
-app.use("/auth", authRouter);
-app.use("/communication", communicationRouter);
-app.use("/events", eventsRouter);
-app.use("/pets", petsRouter);
-app.use("/articles", articlesRouter);
-app.use("/recommendation", recommendationRouter);
-app.use("/users", usersRouter);
+app.use("/api/", indexRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/communication", communicationRouter);
+app.use("/api/events", eventsRouter);
+app.use("/api/pets", petsRouter);
+app.use("/api/articles", articlesRouter);
+app.use("/api/recommendation", recommendationRouter);
+app.use("/api/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

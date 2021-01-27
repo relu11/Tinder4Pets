@@ -1,53 +1,98 @@
-import Cloudant from "@cloudant/cloudant";
-import dotenv from "dotenv";
-import { vcap } from "../config/config";
+import { db } from "../config/firebaseConfig";
 
-dotenv.config();
+/**
+ * Convert firebase docs to objects contianing all the data
+ * @param {FirebaseFirestore.QueryDocumentSnapshot<FirebaseFirestore.DocumentData>[]} docs
+ * @returns {Array} data objects
+ */
+const docsToDataObjects = (docs) => {
+  const result = [];
+  docs.forEach((doc) => {
+    const docData = doc.data();
+    docData.id = doc.id;
+    result.push(docData);
+  });
+  return result;
+};
 
-const cloudant = Cloudant({
-  // eslint-disable-line
-  url: vcap.services.cloudantNoSQLDB.credentials.url,
-  plugins: {
-    iamauth: {
-      iamApiKey: vcap.services.cloudantNoSQLDB.credentials.apikey,
-    },
-  },
-});
-
+/**
+ * Inserts a new document to database
+ * @param {String} collection Collection name
+ * @param {Object} doc Document Data
+ * @returns {{id: String, ...}} Document data along with id
+ */
 export const insertDoc = async (collection, doc) => {
-  const db = cloudant.db.use(collection);
-  const result = await db.insert(doc);
-  return result;
+  const docRef = await db.collection(collection).add(doc);
+  const docData = (await docRef.get()).data();
+  docData.id = docRef.id;
+  return docData;
 };
 
+/**
+ * Insert multiple documents (entries) to database
+ * @param {String} collection Collection Name
+ * @param {Object[]} docs Documents' data
+ * @returns {boolean} Success status of the operation
+ */
 export const insertBulk = async (collection, docs) => {
-  const db = cloudant.db.use(collection);
-  const result = await db.bulk({ docs });
-  return result;
+  const batch = db.batch();
+  docs.forEach((doc) => {
+    const newDocRef = db.collection(collection).doc();
+    batch.set(newDocRef, doc);
+  });
+  await batch.commit();
+  return true;
 };
 
+/**
+ * Get a specific docuement from database
+ * @param {String} collection Collection Name
+ * @param {String} docId Document ID
+ * @returns {{id: String, ...}?} Document data
+ */
 export const getDocWithId = async (collection, docId) => {
-  const db = cloudant.db.use(collection);
-  const result = await db.get(docId);
-  return result;
+  const docSnapshot = await db.collection(collection).doc(docId).get();
+  if (docSnapshot.exists) {
+    const docData = await docSnapshot.data();
+    docData.id = docSnapshot.id;
+    return docData;
+  }
 };
 
+/**
+ * Get docs with a condition
+ * @param {String} collection Collection Name
+ * @param {Object} condition Condition
+ * @returns {Array} Result data
+ */
 export const getDocs = async (collection, condition) => {
-  const db = cloudant.db.use(collection);
-  const result = await db.find({ selector: condition });
-  return result.docs;
-};
-
-export const getAll = async (collection) => {
-  const db = cloudant.db.use(collection);
-  const result = await db.list({ include_docs: true });
-  const docs = result.rows.map((r) => r.doc);
-  return docs;
-};
-
-export const deleteDoc = async (collection, docId) => {
-  const db = cloudant.db.use(collection);
-  const doc = await getDocWithId(collection, docId);
-  const result = await db.destroy(doc._id, doc._rev);
+  let query = db.collection(collection);
+  Object.keys(condition).forEach((c) => {
+    query = query.where(c, "==", condition[c]);
+  });
+  const querySnapshot = await query.get();
+  const result = docsToDataObjects(querySnapshot.docs);
   return result;
+};
+
+/**
+ * Get all documents in a collection
+ * @param {String} collection Collection Name
+ * @returns {Array} Result documents' data
+ */
+export const getAll = async (collection) => {
+  const querySnapshot = await db.collection(collection).get();
+  const result = docsToDataObjects(querySnapshot.docs);
+  return result;
+};
+
+/**
+ * Delete a document from database
+ * @param {String} collection Collection Name
+ * @param {String} docId Document ID
+ * @returns {Boolean} Success state of the operations
+ */
+export const deleteDoc = async (collection, docId) => {
+  await db.collection(collection).doc(docId).delete();
+  return true;
 };

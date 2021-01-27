@@ -12,13 +12,13 @@ import {
 const router = Router();
 
 router.get("/me/pets", authVaildator, async (req, res) => {
-  const id = req.user._id;
+  const id = req.user.id;
   const pets = await getUserPets(id);
   res.send({ success: true, pets });
 });
 
 router.post("/me/pets", authVaildator, async (req, res) => {
-  const id = req.user._id;
+  const id = req.user.id;
   const { newPet } = req.body;
   try {
     const result = await addPet(id, newPet);
@@ -33,7 +33,7 @@ router.put("/me/pets/:petId", authVaildator, async (req, res) => {
   const { pet } = req.body;
   const { petId } = req.params;
   try {
-    const result = await editPet(req.user._id, petId, pet);
+    const result = await editPet(req.user.id, petId, pet);
     res.send({ success: true, result });
   } catch (err) {
     if (err.message === "unauthorized") {
@@ -49,7 +49,7 @@ router.put("/me/pets/:petId", authVaildator, async (req, res) => {
 router.delete("/me/pets/:petId", authVaildator, async (req, res) => {
   const { petId } = req.params;
   try {
-    const result = await deletePet(req.user._id, petId);
+    const result = await deletePet(req.user.id, petId);
     res.send({ success: true, result });
   } catch (err) {
     if (err.message === "unauthorized") {
@@ -73,7 +73,7 @@ router.get("/me/events", authVaildator, async (req, res) => {
 
 router.get("/me/adopted", authVaildator, async (req, res) => {
   try {
-    const adoptedPets = await getUserAdoptedPets(req.user._id);
+    const adoptedPets = await getUserAdoptedPets(req.user.id);
     res.send({ success: true, adoptedPets });
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -82,9 +82,9 @@ router.get("/me/adopted", authVaildator, async (req, res) => {
 
 router.get("/profile", authVaildator, async (req, res) => {
   try {
-    const pets = await getUserPets(req.user._id);
+    const pets = await getUserPets(req.user.id);
     const events = await getUserEvents(req.user);
-    const adoptedPets = await getUserAdoptedPets(req.user._id);
+    const adoptedPets = await getUserAdoptedPets(req.user.id);
     res.send({ success: true, pets, events, adoptedPets });
   } catch (err) {
     res.status(500).send({ message: err.message });

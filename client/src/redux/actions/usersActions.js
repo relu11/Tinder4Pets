@@ -1,10 +1,11 @@
 import Cookie from "universal-cookie";
+import { API_URL } from "../../helpers/config";
 import { ADD_PET, ADD_PET_RESET, SETUP_PROFILE } from "../actionTypes";
 
 export const setUpProfile = () => async (dispatch) => {
   const cookies = new Cookie();
   const token = cookies.get("authToken");
-  const res = await fetch(`${process.env.REACT_APP_API_URL}/users/profile`, {
+  const res = await fetch(`${API_URL}/users/profile`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -17,7 +18,7 @@ export const setUpProfile = () => async (dispatch) => {
 export const addPet = (petData) => async (dispatch) => {
   const cookies = new Cookie();
   const token = cookies.get("authToken");
-  const res = await fetch(`${process.env.REACT_APP_API_URL}/users/me/pets`, {
+  const res = await fetch(`${API_URL}/users/me/pets`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
