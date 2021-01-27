@@ -59,20 +59,20 @@ function Events(props) {
   return (
     <Container className={classes.root} maxWidth="lg">
       <AddEventDialog open={dialogOpen} setOpen={setDialogOpen} />
-      {events && events.length ? (
-        <section className={classes.section}>
-          <Typography variant="h4" className={classes.sectionTitle}>
-            Events
-            <Fab
-              className={classes.fab}
-              color="primary"
-              aria-label="add"
-              size="small"
-              onClick={() => setDialogOpen(true)}
-            >
-              <AddIcon />
-            </Fab>
-          </Typography>
+      <section className={classes.section}>
+        <Typography variant="h4" className={classes.sectionTitle}>
+          Events
+          <Fab
+            className={classes.fab}
+            color="primary"
+            aria-label="add"
+            size="small"
+            onClick={() => setDialogOpen(true)}
+          >
+            <AddIcon />
+          </Fab>
+        </Typography>
+        {events && events.length ? (
           <Grid container spacing={4}>
             {events &&
               events.map((e) => (
@@ -94,10 +94,10 @@ function Events(props) {
                 </Grid>
               ))}
           </Grid>
-        </section>
-      ) : (
-        ""
-      )}
+        ) : (
+          ""
+        )}
+      </section>
     </Container>
   );
 }

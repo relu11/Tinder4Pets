@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "prestart": "babel ./src --out-dir build",
+    "prestart": "babel ./src --out-dir functions/build",
     "start": "node ./build/bin/www",
-    "startdev": "nodemon --exec babel-node ./src/bin/www.js",
+    "startdev": "export FIRESTORE_EMULATOR_HOST=\"localhost:8080\" && export GCLOUD_PROJECT=\"pets-network-7d679\" && nodemon --exec babel-node ./src/bin/www.js",
     "lint": "./node_modules/.bin/eslint ./src",
     "pretty": "prettier --write '**/*.{js,json}' '!node_modules/**'",
-    "postpretty": "npm run lint --fix"
+    "postpretty": "npm run lint --fix",
+    "build": "babel ./src --out-dir functions/build"
   },
   "dependencies": {
     "@babel/cli": "^7.12.10",
@@ -29,6 +30,7 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "express": "~4.16.1",
+    "firebase-admin": "^9.4.2",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.5.1",
@@ -37,6 +39,7 @@
     "prettier": "^2.2.1"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.12.1",
     "nodemon": "^2.0.6"
   }
 }

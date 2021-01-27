@@ -16,13 +16,13 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/my", authVaildator, async (req, res) => {
-  const id = req.user._id;
+  const id = req.user.id;
   const articles = await getMyArticles(id);
   res.send({ success: true, articles });
 });
 
 router.post("/", authVaildator, async (req, res) => {
-  const id = req.user._id;
+  const id = req.user.id;
   const { newArticle } = req.body;
   try {
     await addArticle(id, newArticle);
@@ -37,7 +37,7 @@ router.put("/:articleId", authVaildator, async (req, res) => {
   const { article } = req.body;
   const { articleId } = req.params;
   try {
-    const result = await editArticle(req.user._id, articleId, article);
+    const result = await editArticle(req.user.id, articleId, article);
     res.send({ success: true, result });
   } catch (err) {
     if (err.message === "unauthorized") {
@@ -53,7 +53,7 @@ router.put("/:articleId", authVaildator, async (req, res) => {
 router.delete("/:articleId", authVaildator, async (req, res) => {
   const { articleId } = req.params;
   try {
-    const result = await deleteArticle(req.user._id, articleId);
+    const result = await deleteArticle(req.user.id, articleId);
     res.send({ success: true, result });
   } catch (err) {
     if (err.message === "unauthorized") {

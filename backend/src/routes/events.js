@@ -10,9 +10,9 @@ import {
 const router = Router();
 
 router.post("/", authVaildator, async (req, res) => {
-  if (req.user.type === "Admin") {
+  if (req.user.type === "admin") {
     console.log(req.body);
-    const id = req.user._id;
+    const id = req.user.id;
     const { newEvent } = req.body;
     try {
       await addEvent(id, newEvent);
@@ -31,7 +31,7 @@ router.put("/:eventId", authVaildator, async (req, res) => {
     const { event } = req.body;
     const { eventId } = req.params;
     try {
-      const result = await editEvent(req.user._id, eventId, event);
+      const result = await editEvent(req.user.id, eventId, event);
       res.send({ success: true, result });
     } catch (err) {
       if (err.message === "unauthorized") {
@@ -48,7 +48,7 @@ router.put("/:eventId", authVaildator, async (req, res) => {
 router.delete("/:eventId", authVaildator, async (req, res) => {
   const { eventId } = req.params;
   try {
-    const result = await deleteEvent(req.user._id, eventId);
+    const result = await deleteEvent(req.user.id, eventId);
     res.send({ success: true, result });
   } catch (err) {
     if (err.message === "unauthorized") {

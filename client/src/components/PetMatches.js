@@ -22,9 +22,9 @@ function PetMatches({ setPetMatches, clearPetMatches, matches }) {
       <h3>Here is your matches</h3>
       {matches &&
         matches.map((m) => (
-          <Card key={m._id}>
+          <Card key={m.id}>
             <p>{m.name}</p>
-            <p>{m._id}</p>
+            <p>{m.id}</p>
             <p>{m.breed}</p>
             <p>{m.ageMonths}</p>
             <p>{m.city}</p>

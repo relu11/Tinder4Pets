@@ -103,7 +103,7 @@ function AdoptionPets(props) {
                           size="small"
                           color="primary"
                           variant="contained"
-                          onClick={() => adoptPet(e._id)}
+                          onClick={() => adoptPet(e.id)}
                         >
                           Adopt
                         </Button>
