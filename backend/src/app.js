@@ -6,11 +6,9 @@ import cors from "cors";
 
 import indexRouter from "./routes/index";
 import authRouter from "./routes/auth";
-import communicationRouter from "./routes/communication";
 import eventsRouter from "./routes/events";
 import petsRouter from "./routes/pets";
 import articlesRouter from "./routes/articles";
-import recommendationRouter from "./routes/recommendation";
 import usersRouter from "./routes/users";
 import { CLIENTS } from "./config/config";
 
@@ -30,11 +28,9 @@ app.use(
 
 app.use("/api/", indexRouter);
 app.use("/api/auth", authRouter);
-app.use("/api/communication", communicationRouter);
 app.use("/api/events", eventsRouter);
 app.use("/api/pets", petsRouter);
 app.use("/api/articles", articlesRouter);
-app.use("/api/recommendation", recommendationRouter);
 app.use("/api/users", usersRouter);
 
 // catch 404 and forward to error handler

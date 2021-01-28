@@ -11,12 +11,10 @@ const router = Router();
 
 router.post("/", authVaildator, async (req, res) => {
   if (req.user.type === "admin") {
-    console.log(req.body);
     const id = req.user.id;
     const { newEvent } = req.body;
     try {
       await addEvent(id, newEvent);
-      console.log("Added event", newEvent);
       res.send({ success: true, event: newEvent });
     } catch (err) {
       res.status(500).send({ sucess: false, message: err.message });
@@ -36,7 +34,7 @@ router.put("/:eventId", authVaildator, async (req, res) => {
     } catch (err) {
       if (err.message === "unauthorized") {
         res.status(401).send({ success: false, message: "not the owner" });
-      } else if (err.error === "not_found") {
+      } else if (err.message === "not found") {
         res.status(404).send({ success: false, message: "event not found" });
       } else {
         res.status(500).send({ success: false, message: err.message });
@@ -53,7 +51,7 @@ router.delete("/:eventId", authVaildator, async (req, res) => {
   } catch (err) {
     if (err.message === "unauthorized") {
       res.status(401).send({ success: false, message: "not the owner" });
-    } else if (err.error === "not_found") {
+    } else if (err.message === "not found") {
       res.status(404).send({ success: false, message: "event not found" });
     } else {
       res.status(500).send({ success: false, message: err.message });

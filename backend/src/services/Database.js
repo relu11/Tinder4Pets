@@ -22,7 +22,14 @@ const docsToDataObjects = (docs) => {
  * @returns {{id: String, ...}} Document data along with id
  */
 export const insertDoc = async (collection, doc) => {
-  const docRef = await db.collection(collection).add(doc);
+  const collectionRef = await db.collection(collection);
+  let docRef;
+  if (doc.id) {
+    docRef = await collectionRef.doc(doc.id);
+    await docRef.set(doc, { merge: true });
+  } else {
+    docRef = await collectionRef.add(doc);
+  }
   const docData = (await docRef.get()).data();
   docData.id = docRef.id;
   return docData;
@@ -57,6 +64,7 @@ export const getDocWithId = async (collection, docId) => {
     docData.id = docSnapshot.id;
     return docData;
   }
+  return null;
 };
 
 /**

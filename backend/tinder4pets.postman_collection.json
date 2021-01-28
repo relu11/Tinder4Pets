@@ -1,0 +1,708 @@
+{
+	"info": {
+		"_postman_id": "23f0d3d9-64cc-4001-88ee-9d5eb96baf87",
+		"name": "tinder4pets",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Islam Mohamed\",\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"123123\",\r\n    \"city\": \"cairo\",\r\n    \"type\": \"Admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/auth/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validate token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXR5IjoiY2Fpcm8iLCJwYXNzd29yZCI6IiQyYiQxMCRHRG9LM0tDZC9jOTVPVExpcGZDYjEuNER3WTBpQVdLeVU3ZEhJcmtSOEJML0VaZUhSYlF3SyIsIm5hbWUiOiJNb2F6IiwidGltZUNyZWF0ZWQiOnsiX3NlY29uZHMiOjE2MTE3NDI2MjIsIl9uYW5vc2Vjb25kcyI6NTYwMDAwMDB9LCJlbWFpbCI6Im1vYXpAdGVzdC5jb20iLCJfaWQiOiJ5Y0pIZnJwQmlTYU93andXNTIxdyIsImlhdCI6MTYxMTc0MjYyMn0.stsBkVKGd9hKYVuZmGL_YcDOh9vEphQSmGzjenLrw-I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/auth/validate",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"validate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXR5IjoiY2Fpcm8iLCJwYXNzd29yZCI6IiQyYiQxMCRHRG9LM0tDZC9jOTVPVExpcGZDYjEuNER3WTBpQVdLeVU3ZEhJcmtSOEJML0VaZUhSYlF3SyIsIm5hbWUiOiJNb2F6IiwidGltZUNyZWF0ZWQiOnsiX3NlY29uZHMiOjE2MTE3NDI2MjIsIl9uYW5vc2Vjb25kcyI6NTYwMDAwMDB9LCJlbWFpbCI6Im1vYXpAdGVzdC5jb20iLCJfaWQiOiJ5Y0pIZnJwQmlTYU93andXNTIxdyIsImlhdCI6MTYxMTc0MjYyMn0.stsBkVKGd9hKYVuZmGL_YcDOh9vEphQSmGzjenLrw-I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/users/profile",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Articles",
+			"item": [
+				{
+					"name": "Get all articles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/articles",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"articles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create article",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXR5IjoiY2Fpcm8iLCJuYW1lIjoiSXNsYW0gTW9oYW1lZCIsInRpbWVDcmVhdGVkIjp7Il9zZWNvbmRzIjoxNjExNzgzMTgzLCJfbmFub3NlY29uZHMiOjM4MTAwMDAwMH0sImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImlkIjoidzZLNm1YcDBweXg0YWVPSk56cDMiLCJpYXQiOjE2MTE3ODMyODd9.VZn1SYyYb_bJLpn32kcp_gikHreNkDj5JRf2uBwE78s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"newArticle\": {\n        \"title\": \"  the only approved one \",\n        \"time\": \"8:20\",\n        \"likes\": [\"ea8a9b03219558c2ed2b1bb1e6c6092d\", \"ea8a9b03219558c2ed2b1bb1e68d9cdf\"],\n        \"content\": \"this is the content of the fifth article\",\n        \"comments\": \"first comment on fifth article\",\n        \"approved\": true\n        }\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/articles",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"articles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit article",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXR5IjoiY2Fpcm8iLCJuYW1lIjoiSXNsYW0gTW9oYW1lZCIsInRpbWVDcmVhdGVkIjp7Il9zZWNvbmRzIjoxNjExNzgzMTgzLCJfbmFub3NlY29uZHMiOjM4MTAwMDAwMH0sImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImlkIjoidzZLNm1YcDBweXg0YWVPSk56cDMiLCJpYXQiOjE2MTE3ODMyODd9.VZn1SYyYb_bJLpn32kcp_gikHreNkDj5JRf2uBwE78s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"article\": {\n        \"title\": \"edited article\",\n        \"time\": \"10:20\",\n        \"likes\": [\"ea8a9b03219558c2ed2b1bb1e68d9cdf\"],\n        \"content\": \"this is the content of the edited article\",\n        \"comments\": \"first comment on edited article\",\n        \"approved\": false\n        }\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/articles/sbBk0WsIeWphyQM8GXWq",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"articles",
+								"sbBk0WsIeWphyQM8GXWq"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete article",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhOGJkNjE1ZWIzNzRiYzNjZWFkZTNmMjNkZTVhNDNjMiIsIl9yZXYiOiIzLWIxZTY2Y2QxYzAwMTJiNWJjMGI2YjBlM2FkY2MzMDY1IiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJuYW1lIjoiQWRtaW4iLCJjaXR5IjoiR2l6YSIsInR5cGUiOiJBZG1pbiIsInRpbWVDcmVhdGVkIjoiMjAyMS0wMS0wNVQyMDozODozMS4xNjVaIiwiYXR0ZW5kZWRFdmVudHMiOlsiNWRlN2FhNWFhMjBkY2Y5YTcyN2EzMDY2MjNlMGQ4ZDYiXSwiaWF0IjoxNjA5OTE0Mjk5fQ.Ymr1oBD1X4_agVtSMzUdsB1ujLRMtyjPWqELXhMNlDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/articles/ca43c5a04f79b4e138c68641300d7406",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"articles",
+								"ca43c5a04f79b4e138c68641300d7406"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get my articles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXR5IjoiY2Fpcm8iLCJuYW1lIjoiSXNsYW0gTW9oYW1lZCIsInRpbWVDcmVhdGVkIjp7Il9zZWNvbmRzIjoxNjExNzgzMTgzLCJfbmFub3NlY29uZHMiOjM4MTAwMDAwMH0sImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImlkIjoidzZLNm1YcDBweXg0YWVPSk56cDMiLCJpYXQiOjE2MTE3ODMyODd9.VZn1SYyYb_bJLpn32kcp_gikHreNkDj5JRf2uBwE78s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/articles/my",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"articles",
+								"my"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Get my events",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJlYThhOWIwMzIxOTU1OGMyZWQyYjFiYjFlNjhkOWNkZiIsIl9yZXYiOiIxLWU3ZGRlNzA5ODUxOTlhNzZhODRkNDdmZmU2ZjRkMzU0IiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwibmFtZSI6IklzbGFtIE1vaGFtZWQiLCJjaXR5IjoiY2Fpcm8iLCJ0aW1lQ3JlYXRlZCI6IjIwMjEtMDEtMDVUMjA6MzA6MzIuNzA5WiIsImlhdCI6MTYwOTg3ODY0NX0.Sjf_Z2kZi70h_J72pFwPwDfFuDnphGpH7II8O5u22l8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/users/me/events",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"me",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/events",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhOGJkNjE1ZWIzNzRiYzNjZWFkZTNmMjNkZTVhNDNjMiIsIl9yZXYiOiIzLWIxZTY2Y2QxYzAwMTJiNWJjMGI2YjBlM2FkY2MzMDY1IiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJuYW1lIjoiQWRtaW4iLCJjaXR5IjoiR2l6YSIsInR5cGUiOiJBZG1pbiIsInRpbWVDcmVhdGVkIjoiMjAyMS0wMS0wNVQyMDozODozMS4xNjVaIiwiYXR0ZW5kZWRFdmVudHMiOlsiNWRlN2FhNWFhMjBkY2Y5YTcyN2EzMDY2MjNlMGQ4ZDYiXSwiaWF0IjoxNjA5OTE0Mjk5fQ.Ymr1oBD1X4_agVtSMzUdsB1ujLRMtyjPWqELXhMNlDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"newEvent\": {\n        \"name\": \"My event before editing\",\n    \"time\": \"8:20\",\n    \"attendees\": [\"ea8a9b03219558c2ed2b1bb1e6c6092d\", \"ea8a9b03219558c2ed2b1bb1e68d9cdf\"],\n    \"creator\": \"ali\",\n    \"location\": \"cairo\",\n    \"city\": \"elshrouk\"}\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/events",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhOGJkNjE1ZWIzNzRiYzNjZWFkZTNmMjNkZTVhNDNjMiIsIl9yZXYiOiIzLWIxZTY2Y2QxYzAwMTJiNWJjMGI2YjBlM2FkY2MzMDY1IiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJuYW1lIjoiQWRtaW4iLCJjaXR5IjoiR2l6YSIsInR5cGUiOiJBZG1pbiIsInRpbWVDcmVhdGVkIjoiMjAyMS0wMS0wNVQyMDozODozMS4xNjVaIiwiYXR0ZW5kZWRFdmVudHMiOlsiNWRlN2FhNWFhMjBkY2Y5YTcyN2EzMDY2MjNlMGQ4ZDYiXSwiaWF0IjoxNjA5OTE0Mjk5fQ.Ymr1oBD1X4_agVtSMzUdsB1ujLRMtyjPWqELXhMNlDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"event\": {\n        \"name\": \"new new\",\n    \"time\": \"8:20\",\n    \"attendees\": [\"ea8a9b03219558c2ed2b1bb1e6c6092d\", \"ea8a9b03219558c2ed2b1bb1e68d9cdf\"],\n    \"creator\": \"not moaz\",\n    \"location\": \"cairo\",\n    \"city\": \"elshrouk\"}\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/events/eff444ec2c84f3bcd6a1cb8053e1672e",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"events",
+								"eff444ec2c84f3bcd6a1cb8053e1672e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhOGJkNjE1ZWIzNzRiYzNjZWFkZTNmMjNkZTVhNDNjMiIsIl9yZXYiOiIzLWIxZTY2Y2QxYzAwMTJiNWJjMGI2YjBlM2FkY2MzMDY1IiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJuYW1lIjoiQWRtaW4iLCJjaXR5IjoiR2l6YSIsInR5cGUiOiJBZG1pbiIsInRpbWVDcmVhdGVkIjoiMjAyMS0wMS0wNVQyMDozODozMS4xNjVaIiwiYXR0ZW5kZWRFdmVudHMiOlsiNWRlN2FhNWFhMjBkY2Y5YTcyN2EzMDY2MjNlMGQ4ZDYiXSwiaWF0IjoxNjA5OTE0Mjk5fQ.Ymr1oBD1X4_agVtSMzUdsB1ujLRMtyjPWqELXhMNlDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/events/7b9347f7f3d3f93af946520df4e94c29",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"events",
+								"7b9347f7f3d3f93af946520df4e94c29"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pets",
+			"item": [
+				{
+					"name": "Get my pets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXR5IjoiY2Fpcm8iLCJuYW1lIjoiQWRtaW4iLCJ0aW1lQ3JlYXRlZCI6eyJfc2Vjb25kcyI6MTYxMTc0MjQ0MiwiX25hbm9zZWNvbmRzIjozNDAwMDAwMDB9LCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInR5cGUiOiJhZG1pbiIsImlkIjoiV2tPUncwc0VnUlhDaFhselRFdWQiLCJpYXQiOjE2MTE3NDMxMjJ9._GCXPtanZ7haUHNiemYfjiVZRNR8m8Fy2o8AaUU0VK0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/users/me/pets",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users",
+								"me",
+								"pets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add pet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXR5IjoiY2Fpcm8iLCJuYW1lIjoiQWRtaW4iLCJ0aW1lQ3JlYXRlZCI6eyJfc2Vjb25kcyI6MTYxMTc0MjQ0MiwiX25hbm9zZWNvbmRzIjozNDAwMDAwMDB9LCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInR5cGUiOiJhZG1pbiIsImlkIjoiV2tPUncwc0VnUlhDaFhselRFdWQiLCJpYXQiOjE2MTE3NDMxMjJ9._GCXPtanZ7haUHNiemYfjiVZRNR8m8Fy2o8AaUU0VK0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPet\": {\r\n        \"name\": \"test name11\",\r\n        \"breed\": \"test breed\",\r\n        \"ageMonths\": 6,\r\n        \"city\": \"cairo\",\r\n        \"gender\": \"male\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/users/me/pets",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users",
+								"me",
+								"pets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get adopted pets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXR5IjoiY2Fpcm8iLCJwYXNzd29yZCI6IiQyYiQxMCRHRG9LM0tDZC9jOTVPVExpcGZDYjEuNER3WTBpQVdLeVU3ZEhJcmtSOEJML0VaZUhSYlF3SyIsIm5hbWUiOiJNb2F6IiwidGltZUNyZWF0ZWQiOnsiX3NlY29uZHMiOjE2MTE3NDI2MjIsIl9uYW5vc2Vjb25kcyI6NTYwMDAwMDB9LCJlbWFpbCI6Im1vYXpAdGVzdC5jb20iLCJfaWQiOiJ5Y0pIZnJwQmlTYU93andXNTIxdyIsImlhdCI6MTYxMTc0MjYyMn0.stsBkVKGd9hKYVuZmGL_YcDOh9vEphQSmGzjenLrw-I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/users/me/adopted",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users",
+								"me",
+								"adopted"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add adoption pet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXR5IjoiY2Fpcm8iLCJwYXNzd29yZCI6IiQyYiQxMCRHRG9LM0tDZC9jOTVPVExpcGZDYjEuNER3WTBpQVdLeVU3ZEhJcmtSOEJML0VaZUhSYlF3SyIsIm5hbWUiOiJNb2F6IiwidGltZUNyZWF0ZWQiOnsiX3NlY29uZHMiOjE2MTE3NDI2MjIsIl9uYW5vc2Vjb25kcyI6NTYwMDAwMDB9LCJlbWFpbCI6Im1vYXpAdGVzdC5jb20iLCJfaWQiOiJ5Y0pIZnJwQmlTYU93andXNTIxdyIsImlhdCI6MTYxMTc0MjYyMn0.stsBkVKGd9hKYVuZmGL_YcDOh9vEphQSmGzjenLrw-I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pet\": {\r\n        \"name\": \"test name\",\r\n        \"breed\": \"test breed\",\r\n        \"ageMonths\": 6,\r\n        \"city\": \"cairo\",\r\n        \"gender\": \"male\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/pets/adoption/",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"pets",
+								"adoption",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get adoption pets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/pets/adoption/",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"pets",
+								"adoption",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adopt pet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXR5IjoiY2Fpcm8iLCJuYW1lIjoiQWRtaW4iLCJ0aW1lQ3JlYXRlZCI6eyJfc2Vjb25kcyI6MTYxMTc0MjQ0MiwiX25hbm9zZWNvbmRzIjozNDAwMDAwMDB9LCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInR5cGUiOiJhZG1pbiIsImlkIjoiV2tPUncwc0VnUlhDaFhselRFdWQiLCJpYXQiOjE2MTE3NDMxMjJ9._GCXPtanZ7haUHNiemYfjiVZRNR8m8Fy2o8AaUU0VK0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/pets/adoption/kjtVSvryfwNptjIuQb41/adopt",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"pets",
+								"adoption",
+								"kjtVSvryfwNptjIuQb41",
+								"adopt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Pets with Match",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXR5IjoiY2Fpcm8iLCJuYW1lIjoiQWRtaW4iLCJ0aW1lQ3JlYXRlZCI6eyJfc2Vjb25kcyI6MTYxMTc0MjQ0MiwiX25hbm9zZWNvbmRzIjozNDAwMDAwMDB9LCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInR5cGUiOiJhZG1pbiIsImlkIjoiV2tPUncwc0VnUlhDaFhselRFdWQiLCJpYXQiOjE2MTE3NDMxMjJ9._GCXPtanZ7haUHNiemYfjiVZRNR8m8Fy2o8AaUU0VK0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/pets",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"pets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Matches of a pet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXR5IjoiY2Fpcm8iLCJuYW1lIjoiQWRtaW4iLCJ0aW1lQ3JlYXRlZCI6eyJfc2Vjb25kcyI6MTYxMTc0MjQ0MiwiX25hbm9zZWNvbmRzIjozNDAwMDAwMDB9LCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInR5cGUiOiJhZG1pbiIsImlkIjoiV2tPUncwc0VnUlhDaFhselRFdWQiLCJpYXQiOjE2MTE3NDMxMjJ9._GCXPtanZ7haUHNiemYfjiVZRNR8m8Fy2o8AaUU0VK0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/pets/dVUoyV0JWIB9oFw7UN6o/match",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"pets",
+								"dVUoyV0JWIB9oFw7UN6o",
+								"match"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

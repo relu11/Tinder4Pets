@@ -1,5 +1,4 @@
 import { Router } from "express";
-import fetch from "node-fetch";
 import { createUser, login, authVaildator } from "../services/auth";
 
 const router = Router();
@@ -14,7 +13,9 @@ router.post("/signup", async (req, res) => {
     return res.send({ success: true, user: user.userDoc, token: user.token });
   } catch (err) {
     console.log(err.message);
-    console.log(err.stack);
+    if (err.message === "user-exiss") {
+      return res.status(403).send({ success: false, message: "User exists" });
+    }
     return res.status(500).send(err.message);
   }
 });
@@ -31,6 +32,9 @@ router.post("/login", async (req, res) => {
     switch (err.message) {
       case "invalid-data": {
         return res.status(401).send({ message: "invalid data" });
+      }
+      case "not found": {
+        return res.status(404).send({ success: false, message: "Not found" });
       }
       default: {
         console.log(err.message);

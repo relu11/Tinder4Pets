@@ -1,9 +1,8 @@
 import { Router } from "express";
-import { getAll } from "../services/Database";
 import { authVaildator, optionalAuth } from "../services/auth";
 import {
   findPetMatches,
-  getALlPets,
+  getAllPets,
   nearbyServices,
   addServices,
   editServices,
@@ -15,10 +14,9 @@ import {
 
 const router = Router();
 
-// get all pets
 router.get("/", optionalAuth, async (req, res) => {
   try {
-    const pets = req.user ? await getALlPets(req.user.id) : await getALlPets();
+    const pets = req.user ? await getAllPets(req.user.id) : await getAllPets();
     res.send({ success: true, pets });
   } catch (err) {
     res.status(500).send({ success: false, message: err.message });
@@ -29,13 +27,16 @@ router.get("/:petId/match", authVaildator, async (req, res) => {
   try {
     const { petId } = req.params;
     const pets = await findPetMatches(petId);
-    res.send({ success: true, pets });
+    return res.send({ success: true, pets });
   } catch (err) {
-    res.status(500).send({ success: false, message: err.message });
+    if (err.message === "not found") {
+      return res.status(404).send({ success: false, message: "Pet not found" });
+    }
+    return res.status(500).send({ success: false, message: err.message });
   }
 });
 
-router.get("/nearbyServices", authVaildator, async (req, res) => {
+router.get("/services/nearby", authVaildator, async (req, res) => {
   try {
     const result = await nearbyServices(req.user.city);
     res.send({ success: true, result });
@@ -43,7 +44,8 @@ router.get("/nearbyServices", authVaildator, async (req, res) => {
     res.status(500).send({ sucess: false, message: err.message });
   }
 });
-router.post("/addServices", authVaildator, async (req, res) => {
+
+router.post("/services", authVaildator, async (req, res) => {
   const id = req.user.id;
   const { newService } = req.body;
   try {
@@ -53,7 +55,8 @@ router.post("/addServices", authVaildator, async (req, res) => {
     res.status(500).send({ sucess: false, message: err.message });
   }
 });
-router.put("/editServices/:serviceId", authVaildator, async (req, res) => {
+
+router.put("/services/:serviceId", authVaildator, async (req, res) => {
   const { newServicesData } = req.body;
   const { serviceId } = req.params;
   try {
@@ -63,7 +66,8 @@ router.put("/editServices/:serviceId", authVaildator, async (req, res) => {
     res.status(500).send({ success: false, message: err.message });
   }
 });
-router.delete("/deleteService/:serviceId", authVaildator, async (req, res) => {
+
+router.delete("/services/:serviceId", authVaildator, async (req, res) => {
   const { serviceId } = req.params;
   try {
     const result = await deleteService(req.user.id, serviceId);
@@ -105,6 +109,9 @@ router.put("/adoption/:petId/adopt", authVaildator, async (req, res) => {
       return res
         .status(403)
         .send({ success: false, message: "Pet already adopted" });
+    }
+    if (err.message === "not found") {
+      return res.status(404).send({ success: false, message: "Not found!" });
     }
     console.log(err);
     return res.status(500).send({ success: false, message: err.message });

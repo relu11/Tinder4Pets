@@ -13,8 +13,12 @@ const router = Router();
 
 router.get("/me/pets", authVaildator, async (req, res) => {
   const id = req.user.id;
-  const pets = await getUserPets(id);
-  res.send({ success: true, pets });
+  try {
+    const pets = await getUserPets(id);
+    return res.send({ success: true, pets });
+  } catch (err) {
+    return res.status(500).send({ success: false, message: err.message });
+  }
 });
 
 router.post("/me/pets", authVaildator, async (req, res) => {
@@ -38,7 +42,7 @@ router.put("/me/pets/:petId", authVaildator, async (req, res) => {
   } catch (err) {
     if (err.message === "unauthorized") {
       res.status(401).send({ success: false, message: "not the owner" });
-    } else if (err.error === "not_found") {
+    } else if (err.message === "not found") {
       res.status(404).send({ success: false, message: "pet not found" });
     } else {
       res.status(500).send({ success: false, message: err.message });
@@ -54,7 +58,7 @@ router.delete("/me/pets/:petId", authVaildator, async (req, res) => {
   } catch (err) {
     if (err.message === "unauthorized") {
       res.status(401).send({ success: false, message: "not the owner" });
-    } else if (err.error === "not_found") {
+    } else if (err.message === "not found") {
       res.status(404).send({ success: false, message: "pet not found" });
     } else {
       res.status(500).send({ success: false, message: err.message });

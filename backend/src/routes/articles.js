@@ -11,14 +11,22 @@ import {
 const router = Router();
 
 router.get("/", async (req, res) => {
-  const articles = await getAllArticles();
-  res.send({ success: true, articles });
+  try {
+    const articles = await getAllArticles();
+    res.send({ success: true, articles });
+  } catch (err) {
+    res.status(500).send({ success: false, message: err.message });
+  }
 });
 
 router.get("/my", authVaildator, async (req, res) => {
-  const id = req.user.id;
-  const articles = await getMyArticles(id);
-  res.send({ success: true, articles });
+  try {
+    const id = req.user.id;
+    const articles = await getMyArticles(id);
+    res.send({ success: true, articles });
+  } catch (err) {
+    res.status(500).send({ success: false, message: err.message });
+  }
 });
 
 router.post("/", authVaildator, async (req, res) => {
@@ -26,7 +34,6 @@ router.post("/", authVaildator, async (req, res) => {
   const { newArticle } = req.body;
   try {
     await addArticle(id, newArticle);
-    console.log("Added Article", newArticle);
     res.send({ success: true, article: newArticle });
   } catch (err) {
     res.status(500).send({ success: false, message: err.message });
@@ -42,7 +49,7 @@ router.put("/:articleId", authVaildator, async (req, res) => {
   } catch (err) {
     if (err.message === "unauthorized") {
       res.status(401).send({ success: false, message: "not the owner" });
-    } else if (err.error === "not_found") {
+    } else if (err.message === "not found") {
       res.status(404).send({ success: false, message: "article not found" });
     } else {
       res.status(500).send({ success: false, message: err.message });
@@ -58,7 +65,7 @@ router.delete("/:articleId", authVaildator, async (req, res) => {
   } catch (err) {
     if (err.message === "unauthorized") {
       res.status(401).send({ success: false, message: "not the owner" });
-    } else if (err.error === "not_found") {
+    } else if (err.message === "not found") {
       res.status(404).send({ success: false, message: "article not found" });
     } else {
       res.status(500).send({ success: false, message: err.message });
