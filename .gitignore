@@ -24,3 +24,6 @@ yarn-error.log*
 *-lock.json
 
 .env
+
+*debug.log
+.firebase
